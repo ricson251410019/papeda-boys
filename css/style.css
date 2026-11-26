@@ -16,6 +16,15 @@
   scroll-behavior: smooth;
 }
 
+html {
+  scroll-padding-top: 85px;
+}
+
+::selection {
+  background: #e9b75b;
+  color: #08151c;
+}
+
 body {
   background: var(--bg);
   color: var(--cream);
@@ -340,6 +349,14 @@ a {
   border-left: 3px solid var(--gold);
   border-radius: 4px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, .15);
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+
+.scene.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .scene-number {
