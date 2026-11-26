@@ -1,5 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Menu navigasi HP
   const menuButton = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".nav");
 
@@ -19,20 +20,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Tahun otomatis
   const year = document.getElementById("year");
   if (year) {
     year.textContent = new Date().getFullYear();
   }
 
+  // Animasi kemunculan 10 adegan
   const scenes = document.querySelectorAll(".scene");
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  }, { threshold: 0.12 });
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
 
-  scenes.forEach(scene => observer.observe(scene));
+    scenes.forEach(scene => observer.observe(scene));
+  } else {
+    scenes.forEach(scene => scene.classList.add("visible"));
+  }
 });
